@@ -10,12 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "dom-parser": "^0.1.6",
-    "eslint": "^7.6.0",
     "innertext": "^1.0.3",
     "install": "^0.13.0",
     "node-html-parser": "^1.2.20",
     "npm": "^6.14.7",
     "queryselector": "^0.1.0",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
   }
 }

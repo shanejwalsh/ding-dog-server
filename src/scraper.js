@@ -12,6 +12,7 @@ const getIndividualDogData = dogCard => {
     if (dogCard && dogCard.querySelector) {
         dogData.name = (dogCard.querySelector('h3').childNodes[0].rawText);
         dogData.breed = (dogCard.querySelector('span').childNodes[0].rawText);
+        // TODO this is gross
         dogData.imgSrc = (baseUrl + dogCard.querySelector('img').rawAttrs.split(' ').filter(attr => attr.includes('src'))[0].split('=')[1].replace(/"/g, ''));
         dogData.location = (dogCard.querySelectorAll('span')[1].childNodes[0].rawText);
     }

@@ -4,17 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dom-parser": "^0.1.6",
-    "innertext": "^1.0.3",
-    "install": "^0.13.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0",
     "node-html-parser": "^1.2.20",
-    "npm": "^6.14.7",
-    "queryselector": "^0.1.0",
+    "nodemon": "^2.0.4",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

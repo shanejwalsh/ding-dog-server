@@ -1,5 +1,5 @@
 const HTMLParser = require('node-html-parser');
-const { getSourceAsDOM } = require('./dom');
+const { getSourceAsDOM } = require('./dom.js');
 
 const baseUrl = 'https://www.dogstrust.ie';
 const path = '/rehoming/dogs/page/';

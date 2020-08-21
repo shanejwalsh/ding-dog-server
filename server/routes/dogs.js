@@ -35,7 +35,7 @@ router.get('/:id', getDog, async (req, res) => {
 router.post('/', async (req, res) => {
     const {
         name, imgSrc, breed, location,
-    } = req.body;
+    } = req.body.dogData;
     const dog = new Dog({
         name,
         imgSrc,

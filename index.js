@@ -1,12 +1,14 @@
 const { getDogsFromAllPages, parsedDogArray } = require('./src/scraper');
 
-const logdog = dogs => {
-    dogs.forEach(dog => console.log(dog));
+const { postDogToAPI  } = require('./API');
+
+const saveAllDogs = dogs => {
+    dogs.forEach(dog => postDogToAPI(dog));
 };
 
 const init = () => {
     getDogsFromAllPages();
-    logdog(parsedDogArray);
+    saveAllDogs(parsedDogArray);
 };
 
 init();

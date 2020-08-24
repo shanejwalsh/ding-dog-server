@@ -4,7 +4,16 @@ const { getSourceAsDOM } = require('./dom.js');
 const baseUrl = 'https://www.dogstrust.ie';
 const path = '/rehoming/dogs/page/';
 
-const parsedDogArray = [];
+const getDogImgSrc = card => {
+    if (!card) {
+        return '';
+    }
+
+    const exp = new RegExp(/(?<=src=)(["'])((?:(?!\1).)*)\1/);
+    const attrs = card.querySelector('img').rawAttrs;
+
+    return (attrs.match(exp)[2]);
+};
 
 const getIndividualDogData = dogCard => {
     const dogData = {};
@@ -12,8 +21,7 @@ const getIndividualDogData = dogCard => {
     if (dogCard && dogCard.querySelector) {
         dogData.name = (dogCard.querySelector('h3').childNodes[0].rawText);
         dogData.breed = (dogCard.querySelector('span').childNodes[0].rawText);
-        // TODO this is gross
-        dogData.imgSrc = (baseUrl + dogCard.querySelector('img').rawAttrs.split(' ').filter(attr => attr.includes('src'))[0].split('=')[1].replace(/"/g, ''));
+        dogData.imgSrc = (baseUrl + getDogImgSrc(dogCard));
         dogData.location = (dogCard.querySelectorAll('span')[1].childNodes[0].rawText);
     }
 
@@ -21,8 +29,10 @@ const getIndividualDogData = dogCard => {
 };
 
 const getDogList = container => {
+    const parsedDogArray = [];
+
     if (!container) {
-        return;
+        return parsedDogArray;
     }
 
     const dogArray = container.childNodes;
@@ -34,6 +44,8 @@ const getDogList = container => {
             parsedDogArray.push(dogData);
         }
     });
+
+    return parsedDogArray;
 };
 
 const getNumberOfPages = () => {
@@ -44,20 +56,25 @@ const getNumberOfPages = () => {
 };
 
 const getDogsFromPage = pageNumber => {
-    const dom = getSourceAsDOM(`${baseUrl + path + pageNumber}`);
+    const url = baseUrl + path + pageNumber;
+
+    const dom = getSourceAsDOM(url);
     const root = HTMLParser.parse(dom.rawHTML);
     const dogContainer = root.querySelector('section').querySelectorAll('.row')[1];
 
-    getDogList(dogContainer);
+    return getDogList(dogContainer);
 };
 
 const getDogsFromAllPages = () => {
-    for (let i = 1; i < getNumberOfPages() + 1; i++) {
-        getDogsFromPage(i);
+    let parsedDogArrayAllPages = [];
+    const pages = getNumberOfPages();
+    for (let i = 1; i < pages + 1; i++) {
+        parsedDogArrayAllPages = parsedDogArrayAllPages.concat(getDogsFromPage(i));
     }
+
+    return parsedDogArrayAllPages;
 };
 
 module.exports = {
     getDogsFromAllPages,
-    parsedDogArray,
 };

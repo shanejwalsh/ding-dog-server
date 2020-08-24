@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const Dog = require('../../models/dog');
+const Dog = require('../../../models/dog');
 
 const getDog = async (req, res, next) => {
     let dog;
@@ -49,10 +49,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(400).json({ error: res.message });
     }
-});
-
-router.patch('/:id', (req, res) => {
-
 });
 
 router.delete('/:id', getDog, async (req, res) => {

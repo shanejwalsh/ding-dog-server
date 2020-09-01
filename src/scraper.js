@@ -1,8 +1,8 @@
 const HTMLParser = require('node-html-parser');
 const { getSourceAsDOM } = require('./dom.js');
 
-const baseUrl = 'https://www.dogstrust.ie';
-const path = '/rehoming/dogs/page/';
+const BASE_URL = 'https://www.dogstrust.ie';
+const PATHNAME = '/rehoming/dogs/page/';
 
 const getDogImgSrc = card => {
     if (!card) {
@@ -21,7 +21,7 @@ const getIndividualDogData = dogCard => {
     if (dogCard && dogCard.querySelector) {
         dogData.name = (dogCard.querySelector('h3').childNodes[0].rawText);
         dogData.breed = (dogCard.querySelector('span').childNodes[0].rawText);
-        dogData.imgSrc = (baseUrl + getDogImgSrc(dogCard));
+        dogData.imgSrc = (BASE_URL + getDogImgSrc(dogCard));
         dogData.location = (dogCard.querySelectorAll('span')[1].childNodes[0].rawText);
     }
 
@@ -49,14 +49,14 @@ const getDogList = container => {
 };
 
 const getNumberOfPages = () => {
-    const source = getSourceAsDOM(`${baseUrl + path}1`);
+    const source = getSourceAsDOM(`${BASE_URL + PATHNAME}1`);
     const dom = HTMLParser.parse(source.rawHTML);
     const pages = dom.querySelector('#BodyContent_DogList1_ulPagination');
     return pages.childNodes.length;
 };
 
 const getDogsFromPage = pageNumber => {
-    const url = baseUrl + path + pageNumber;
+    const url = BASE_URL + PATHNAME + pageNumber;
 
     const dom = getSourceAsDOM(url);
     const root = HTMLParser.parse(dom.rawHTML);
@@ -68,8 +68,8 @@ const getDogsFromPage = pageNumber => {
 const getDogsFromAllPages = () => {
     let parsedDogArrayAllPages = [];
     const pages = getNumberOfPages();
-    for (let i = 1; i < pages + 1; i++) {
-        parsedDogArrayAllPages = parsedDogArrayAllPages.concat(getDogsFromPage(i));
+    for (let i = 0; i < pages; i++) {
+        parsedDogArrayAllPages = [...parsedDogArrayAllPages, ...getDogsFromPage(i + 1)];
     }
 
     return parsedDogArrayAllPages;

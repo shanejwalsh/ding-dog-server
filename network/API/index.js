@@ -25,7 +25,22 @@ const postDogToAPI = async (dogData = {}) => {
     }
 };
 
+const deleteAllDogsFromAPI = async () => {
+    try {
+        const resp = await fetch(URL, {
+            method: 'DELETE',
+        });
+
+        const result = await resp.json();
+
+        return result;
+    } catch (error) {
+        return console.error(error);
+    }
+};
+
 module.exports = {
     getAllDogsFromAPI,
     postDogToAPI,
+    deleteAllDogsFromAPI,
 };

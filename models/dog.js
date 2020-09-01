@@ -13,10 +13,12 @@ const dogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    imageSrc: {
+    imgSrc: {
         type: String,
     },
-
+    addedAt: {
+        type: Date,
+    },
 });
 
 module.exports = mongoose.model('Dog', dogSchema);

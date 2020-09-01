@@ -5,7 +5,10 @@ const dogsRouter = require('./routes/dogs');
 
 const app = express();
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 const db = mongoose.connection;
 
 // eslint-disable-next-line no-console

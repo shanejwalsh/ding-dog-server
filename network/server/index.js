@@ -5,7 +5,9 @@ const dogsRouter = require('./routes/dogs');
 
 const app = express();
 
-mongoose.connect(process.env.DB_URL, {
+const atlasDB = `mongodb+srv://shanejwalsh:${process.env.ATLAS_PASSWORD}@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority`;
+
+mongoose.connect(atlasDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

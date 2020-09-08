@@ -8,7 +8,7 @@ const {
 const newDogNumber = dogCollections => {
     const result = dogCollections[0].length - dogCollections[1].results.length;
     const single = result === 1;
-    if (!result || isNaN(result)) {
+    if (result < 0 || isNaN(result)) {
         return console.log('something went wrong.');
     }
 

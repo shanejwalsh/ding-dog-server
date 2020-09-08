@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon network/server/index.js"
+    "start": "./node_modules/.bin/netlify-lambda serve network/server",
+    "build": "./node_modules/.bin/netlify-lambda build network/server"
   },
   "author": "",
   "license": "ISC",
@@ -14,9 +15,11 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.0",
     "mongoose": "^5.10.0",
+    "netlify-lambda": "^2.0.1",
     "node-fetch": "^2.6.0",
     "node-html-parser": "^1.2.20",
     "nodemon": "^2.0.4",
+    "serverless-http": "^2.5.0",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

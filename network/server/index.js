@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const serverless = require('serverless-http');
+
 const mongoose = require('mongoose');
 const dogsRouter = require('./routes/dogs');
 
@@ -20,7 +22,9 @@ db.once('open', () => console.log('db connected'));
 
 app.use(express.json());
 
-app.use('/dogs', dogsRouter);
+app.use('/.netlify/functions/index', dogsRouter);
 
 // eslint-disable-next-line no-console
 app.listen(3000, () => console.log('server started'));
+
+module.exports.handler = serverless(app);

@@ -1,13 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const serverless = require('serverless-http');
-
 const mongoose = require('mongoose');
 const dogsRouter = require('./routes/dogs');
 
 const app = express();
 
-const atlasDB = `mongodb+srv://${process.env.ATLAS_USER}:${process.env.ATLAS_PASSWORD}@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority`;
+const atlasDB = 'mongodb+srv://shanejwalsh:nT0zUSOCmSlUfzG8@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority';
 
 mongoose.connect(atlasDB, {
     useNewUrlParser: true,

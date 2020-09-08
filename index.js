@@ -3,6 +3,7 @@ const { getDogsFromAllPages } = require('./src/scraper');
 const {
     postDogToAPI,
     getAllDogsFromAPI,
+    deleteAllDogsFromAPI,
 } = require('./network/API');
 
 const newDogNumber = dogCollections => {
@@ -24,8 +25,9 @@ const inititalRequest = async () => {
 
 const init = async () => {
     const dogs = await inititalRequest();
-    newDogNumber(dogs);
+    // newDogNumber(dogs);
     postDogToAPI(dogs[0]);
+    // deleteAllDogsFromAPI();
 };
 
 init();

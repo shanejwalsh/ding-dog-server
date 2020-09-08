@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const URL = 'http://localhost:3000/dogs';
+const URL = 'https://lucid-montalcini-13c262.netlify.app/.netlify/functions/index';
 
 const getAllDogsFromAPI = async () => {
     const resp = await fetch(URL);

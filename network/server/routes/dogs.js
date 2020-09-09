@@ -21,8 +21,8 @@ const getDog = async (req, res, next) => {
 
 router.get('/', async (req, res) => {
     try {
-        const dogs = await Dog.find();
-        res.status(200).json({ results: dogs });
+        const dogResults = await Dog.find();
+        res.status(200).json({ dogs: dogResults });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

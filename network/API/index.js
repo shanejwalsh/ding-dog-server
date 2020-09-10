@@ -2,6 +2,8 @@ const fetch = require('node-fetch');
 
 const URL = 'https://lucid-montalcini-13c262.netlify.app/.netlify/functions/index';
 
+// const URL = 'http://localhost:9000/.netlify/functions/index';
+
 const getAllDogsFromAPI = async () => {
     const resp = await fetch(URL);
     const dogs = await resp.json();
@@ -26,9 +28,11 @@ const postDogToAPI = async (dogData = {}) => {
 };
 
 const deleteAllDogsFromAPI = async () => {
+    const user = { user: 'shane', password: 'password' };
     try {
         const resp = await fetch(URL, {
             method: 'DELETE',
+            body: JSON.stringify({ user }),
         });
 
         const result = await resp.json();

@@ -74,12 +74,16 @@ router.delete('/:id', getDog, async (req, res) => {
 
 router.delete('/', async (req, res) => {
     try {
+        //TODO should probably add some actual auth
+        if (req.body.user !== 'shane' || req.body.password !== 'password') {
+            return res.status(401).json({ error: 'not authorised' });
+        }
         await Dog.deleteMany();
         const dogs = await Dog.find();
 
-        res.status(200).json(dogs);
+        return res.status(200).json(dogs);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
 });
 

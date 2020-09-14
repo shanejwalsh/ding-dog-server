@@ -8,7 +8,7 @@ const getDog = async (req, res, next) => {
     try {
         dog = await Dog.findById(req.params.id);
 
-        if (dog == null) {
+        if (dog === null) {
             return req.status(404).json({ message: 'doggie not found' });
         }
     } catch (err) {

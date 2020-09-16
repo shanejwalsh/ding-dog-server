@@ -1,5 +1,5 @@
 const HTMLParser = require('node-html-parser');
-const { getSourceAsDOM } = require('./dom.js');
+const getSourceAsDOM = require('./dom.js');
 
 const BASE_URL = 'https://www.dogstrust.ie';
 const PATHNAME = '/rehoming/dogs/page/';
@@ -12,7 +12,7 @@ const getDogImgSrc = card => {
     const exp = new RegExp(/(?<=src=)(["'])((?:(?!\1).)*)\1/);
     const attrs = card.querySelector('img').rawAttrs;
 
-    return (attrs.match(exp)[2]);
+    return attrs.match(exp)[2];
 };
 
 const getIndividualDogData = dogCard => {
@@ -75,6 +75,4 @@ const getDogsFromAllPages = () => {
     return parsedDogArrayAllPages;
 };
 
-module.exports = {
-    getDogsFromAllPages,
-};
+module.exports = getDogsFromAllPages;

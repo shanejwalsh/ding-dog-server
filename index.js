@@ -1,26 +1,24 @@
-const { getDogsFromAllPages } = require('./src/scraper');
-
+// eslint-disable-next-line no-console
 const {
     postDogToAPI,
     getAllDogsFromAPI,
-    deleteAllDogsFromAPI,
 } = require('./network/API');
 
+const getDogsFromAllPages = require('./src/scraper');
+
 const newDogNumber = dogCollections => {
-    const result = dogCollections[0].length - dogCollections[1].dogs.length;
-    const single = result === 1;
-    if (result < 0 || isNaN(result)) {
+    if (!dogCollections || !dogCollections.length) {
         return console.log('something went wrong.');
     }
 
-    return console.log(
-        `There ${single ? 'is' : 'are'} ${result} new very good boy${single ? '' : 's'}!!!`
-    );
+    const [scrapedDogs, dogsFromApi] = dogCollections;
+
+    return console.log(`Dogs in Api: ${(dogsFromApi.dogs || []).length}, Dogs on website: ${scrapedDogs.length}`);
 };
 
 const inititalRequest = async () => {
-    const allStoredDogs = await getAllDogsFromAPI();
     const allDogsOnWeb = await getDogsFromAllPages();
+    const allStoredDogs = await getAllDogsFromAPI();
 
     return Promise.all([allDogsOnWeb, allStoredDogs]);
 };
@@ -29,7 +27,6 @@ const init = async () => {
     const dogs = await inititalRequest();
     newDogNumber(dogs);
     postDogToAPI(dogs[0]);
-    // deleteAllDogsFromAPI();
 };
 
 init();

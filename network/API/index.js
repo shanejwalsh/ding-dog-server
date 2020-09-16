@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 const fetch = require('node-fetch');
 
-const URL = 'https://lucid-montalcini-13c262.netlify.app/.netlify/functions/index';
+const URL = 'https://ding-dog-api.netlify.app/.netlify/functions/index/dogs';
 
-// const URL = 'http://localhost:9000/.netlify/functions/index';
+// const URL = 'http://localhost:9000/.netlify/functions/index/dogs';
 
 const getAllDogsFromAPI = async () => {
     const resp = await fetch(URL);

@@ -9,6 +9,4 @@ const getSourceAsDOM = url => {
     return parser.parseFromString(xmlhttp.responseText, 'text/html');
 };
 
-module.exports = {
-    getSourceAsDOM,
-};
+module.exports = getSourceAsDOM;

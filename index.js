@@ -12,8 +12,10 @@ const newDogNumber = dogCollections => {
     }
 
     const [scrapedDogs, dogsFromApi] = dogCollections;
+    const availableDogCount = scrapedDogs.length;
+    const savedDogCount = (dogsFromApi.dogs || []).length;
 
-    return console.log(`Dogs in Api: ${(dogsFromApi.dogs || []).length}, Dogs on website: ${scrapedDogs.length}`);
+    return console.log(`Dogs in Api: ${(savedDogCount)}, Dogs on website: ${availableDogCount}`);
 };
 
 const inititalRequest = async () => {

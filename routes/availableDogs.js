@@ -1,5 +1,5 @@
 const express = require('express');
-const { dogController, middlewares } = require('../../../controllers/dogs');
+const { dogController, middlewares } = require('../controllers/dogs');
 
 const router = express.Router();
 

@@ -1,34 +1,31 @@
+const express = require('express');
+const serverless = require('serverless-http');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const dogsRouter = require('./routes/availableDogs');
+
+// const atlasDB = 'mongodb://localhost/dogs';
+
+const atlasDB =
+    'mongodb+srv://shanejwalsh:nT0zUSOCmSlUfzG8@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority';
+
+mongoose.connect(atlasDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on('error', error => console.log(error));
+db.once('open', () => console.log('db connected'));
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use('/.netlify/functions/index', dogsRouter);
+
 // eslint-disable-next-line no-console
-const {
-    postDogToAPI,
-    getAllDogsFromAPI,
-} = require('./network/API');
+app.listen(8000, () => console.log('server started on port 8000'));
 
-const getDogsFromAllPages = require('./src/scraper');
-
-const newDogNumber = dogCollections => {
-    if (!dogCollections || !dogCollections.length) {
-        return console.log('something went wrong.');
-    }
-
-    const [scrapedDogs, dogsFromApi] = dogCollections;
-    const availableDogCount = scrapedDogs.length;
-    const savedDogCount = (dogsFromApi.dogs || []).length;
-
-    return console.log(`Dogs in Api: ${(savedDogCount)}, Dogs on website: ${availableDogCount}`);
-};
-
-const inititalRequest = async () => {
-    const allDogsOnWeb = await getDogsFromAllPages();
-    const allStoredDogs = await getAllDogsFromAPI();
-
-    return Promise.all([allDogsOnWeb, allStoredDogs]);
-};
-
-const init = async () => {
-    const dogs = await inititalRequest();
-    newDogNumber(dogs);
-    postDogToAPI(dogs[0]);
-};
-
-init();
+module.exports.handler = serverless(app);

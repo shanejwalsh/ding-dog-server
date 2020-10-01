@@ -21,12 +21,13 @@ db.on('error', error => console.log(error));
 db.once('open', () => console.log('db connected'));
 
 const app = express();
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
 app.use('/.netlify/functions/index', dogsRouter);
 
 // eslint-disable-next-line no-console
-app.listen(8000, () => console.log('server started on port 8000'));
+app.listen(PORT, () => console.log(`server started on port ${PORT}`));
 
 module.exports.handler = serverless(app);

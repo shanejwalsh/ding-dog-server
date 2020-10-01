@@ -4,13 +4,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dogsRouter = require('./src/routes/availableDogs');
 
-console.log(dogsRouter);
-
 require('dotenv').config();
 
-// const atlasDB = 'mongodb://localhost/dogs';
+console.log(process.env.NODE_ENV, process.env.NODE_ENV === 'development');
 
-const atlasDB = process.env.ATLAS_URI;
+const atlasDB = process.env.NODE_ENV === 'development' ? 'mongodb://localhost/dogs' : process.env.ATLAS_URI;
 
 mongoose.connect(atlasDB, {
     useNewUrlParser: true,

@@ -1,5 +1,7 @@
 const Dog = require('../models/dog');
 
+require('dotenv').config();
+
 const index = async (req, res) => {
     try {
         const dogResults = await Dog.find();
@@ -16,7 +18,9 @@ const create = async (req, res) => {
 
     try {
         dogs.forEach(async dog => {
-            const { name, imgSrc, breed, location } = dog;
+            const {
+                name, imgSrc, breed, location,
+            } = dog;
 
             const existingDog = await Dog.findOne({ name, breed });
             if (!existingDog) {
@@ -48,7 +52,10 @@ const destroy = async (req, res) => {
 
 const destroyAll = async (req, res) => {
     try {
-        if (req.body.user !== 'shane' || req.body.password !== 'password') {
+        if (
+            req.body.user !== process.env.API_USERNAME
+            || req.body.password !== process.env.API_KEY
+        ) {
             return res.status(401).json({ error: 'not authorised' });
         }
         await Dog.deleteMany();

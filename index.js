@@ -6,8 +6,7 @@ const dogsRouter = require('./routes/availableDogs');
 
 // const atlasDB = 'mongodb://localhost/dogs';
 
-const atlasDB =
-    'mongodb+srv://shanejwalsh:nT0zUSOCmSlUfzG8@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority';
+const atlasDB = 'mongodb+srv://shanejwalsh:nT0zUSOCmSlUfzG8@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority';
 
 mongoose.connect(atlasDB, {
     useNewUrlParser: true,

@@ -2,11 +2,15 @@ const express = require('express');
 const serverless = require('serverless-http');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const dogsRouter = require('./routes/availableDogs');
+const dogsRouter = require('./src/routes/availableDogs');
+
+console.log(dogsRouter);
+
+require('dotenv').config();
 
 // const atlasDB = 'mongodb://localhost/dogs';
 
-const atlasDB = 'mongodb+srv://shanejwalsh:nT0zUSOCmSlUfzG8@myfirstcluster.kv7fp.mongodb.net/DogsTrustAPI?retryWrites=true&w=majority';
+const atlasDB = process.env.ATLAS_URI;
 
 mongoose.connect(atlasDB, {
     useNewUrlParser: true,

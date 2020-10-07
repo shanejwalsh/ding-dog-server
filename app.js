@@ -6,7 +6,9 @@ const dogsRouter = require('./src/routes/availableDogs');
 
 require('dotenv').config();
 
-const atlasDB = process.env.NODE_ENV === 'development' ? 'mongodb://localhost/dogs' : process.env.ATLAS_URI;
+const atlasDB = process.env.NODE_ENV === 'development'
+    ? 'mongodb://localhost/dogs'
+    : process.env.ATLAS_URI;
 
 mongoose.connect(atlasDB, {
     useNewUrlParser: true,

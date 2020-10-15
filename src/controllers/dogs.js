@@ -41,6 +41,16 @@ const create = async (req, res) => {
     }
 };
 
+const update = async (req, res) => {
+    try {
+        const dog = await Dog.findByIdAndUpdate(req.params.id, req.body);
+
+        res.json({ dog });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 const destroy = async (req, res) => {
     try {
         await res.dog.remove();
@@ -64,6 +74,26 @@ const destroyAll = async (req, res) => {
         return res.status(200).json(dogs);
     } catch (err) {
         return res.status(500).json({ error: err.message });
+    }
+};
+
+const toggleAdopt = async (req, res) => {
+    try {
+         const { isAdopted, _id } = res.dog;
+
+        const adoptionDate = isAdopted ? null : new Date();
+
+        const dog = await Dog.findByIdAndUpdate(
+            _id,
+            {
+                isAdopted: !isAdopted,
+                adoptedAt: adoptionDate,
+            },
+        );
+
+        res.json({ dog });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
 
@@ -95,8 +125,10 @@ module.exports = {
         index,
         create,
         show,
+        update,
         destroy,
         destroyAll,
+        toggleAdopt,
     },
     middlewares: {
         getDog,

@@ -2,7 +2,7 @@ const express = require('express');
 const serverless = require('serverless-http');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const dogsRouter = require('./src/routes/availableDogs');
+const dogsRouter = require('./src/routes/dogs');
 
 require('dotenv').config();
 
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
-app.use('/.netlify/functions/index', dogsRouter);
+app.use('/.netlify/functions/app/dogs', dogsRouter);
 
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));

@@ -18,6 +18,15 @@ const dogSchema = new mongoose.Schema({
     },
     addedAt: {
         type: Date,
+        default: new Date(),
+    },
+    isAdopted: {
+        type: Boolean,
+        default: false,
+    },
+    adoptedAt: {
+        type: Date,
+        default: null,
     },
 });
 

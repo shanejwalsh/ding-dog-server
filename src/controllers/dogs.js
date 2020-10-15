@@ -4,9 +4,8 @@ require('dotenv').config();
 
 const index = async (req, res) => {
     try {
-        // const dogResults = await Dog.find();
-        // res.status(200).json({ dogs: dogResults });
-        res.status(200).json({ dogs: [{ name: 'penny' }] });
+        const dogResults = await Dog.find();
+        res.status(200).json({ dogs: dogResults });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

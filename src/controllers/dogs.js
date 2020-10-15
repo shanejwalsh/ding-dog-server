@@ -4,8 +4,9 @@ require('dotenv').config();
 
 const index = async (req, res) => {
     try {
-        const dogResults = await Dog.find();
-        res.status(200).json({ dogs: dogResults });
+        // const dogResults = await Dog.find();
+        // res.status(200).json({ dogs: dogResults });
+        res.status(200).json({ dogs: [{ name: 'penny' }] });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -79,7 +80,7 @@ const destroyAll = async (req, res) => {
 
 const toggleAdopt = async (req, res) => {
     try {
-         const { isAdopted, _id } = res.dog;
+        const { isAdopted, _id } = res.dog;
 
         const adoptionDate = isAdopted ? null : new Date();
 
